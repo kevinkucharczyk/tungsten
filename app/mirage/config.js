@@ -1,4 +1,27 @@
+import Mirage from 'ember-cli-mirage';
+
 export default function() {
+  function formToJson(form) {
+    var result = {};
+    form.split("&").forEach(function(part) {
+      var item = part.split("=");
+      result[item[0]] = decodeURIComponent(item[1]);
+    });
+    return result;
+  }
+
+  this.post('/token', function(db, request){
+    var params = formToJson(request.requestBody);
+    if(params.username === "admin" && params.password === "admin") {
+      return {
+        "access_token":"PA$$WORD",
+        "token_type":"bearer"
+      };
+    }else{
+      var body = { errors: 'Username or password is invalid' };
+      return new Mirage.Response(401, {}, body);
+    }
+  });
 
   // These comments are here to help you get started. Feel free to delete them.
 
