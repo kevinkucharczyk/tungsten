@@ -1,10 +1,12 @@
 import Mirage from 'ember-cli-mirage';
 
 export default function() {
+  let bearer = 'MOCKBEARERTOKEN';
+
   function formToJson(form) {
     var result = {};
-    form.split("&").forEach(function(part) {
-      var item = part.split("=");
+    form.split('&').forEach(function(part) {
+      var item = part.split('=');
       result[item[0]] = decodeURIComponent(item[1]);
     });
     return result;
@@ -12,14 +14,31 @@ export default function() {
 
   this.post('/token', function(db, request){
     var params = formToJson(request.requestBody);
-    if(params.username === "admin" && params.password === "admin") {
+    if(params.username === 'admin' && params.password === 'admin') {
       return {
-        "access_token":"PA$$WORD",
-        "token_type":"bearer"
+        'access_token': bearer,
+        'token_type': 'bearer'
       };
-    }else{
+    } else {
       var body = { errors: 'Username or password is invalid' };
       return new Mirage.Response(401, {}, body);
+    }
+  });
+
+  this.get('/users/me', function(db, request){
+    if(request.requestHeaders.Authorization === 'Bearer ' + bearer) {
+      return {
+        data: {
+          type: 'users',
+          id: 1,
+          attributes: {
+            name: 'Admin',
+            email: 'admin@admin.com'
+          }
+        }
+      };
+    } else {
+      return new Mirage.Response(401, {}, {});
     }
   });
 
