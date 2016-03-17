@@ -42,6 +42,18 @@ export default function() {
     }
   });
 
+  this.get('/categories', function(db) {
+    return {
+      data: db.categories.map(attrs => (
+        {
+          type: 'categories',
+          id: attrs.id,
+          attributes: attrs
+        }
+      ))
+    };
+  });
+
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
