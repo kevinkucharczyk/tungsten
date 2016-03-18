@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -5,5 +6,7 @@ export default DS.Model.extend({
   disabled: DS.attr('boolean', { defaultValue: false }),
 
   parent: DS.belongsTo('category', { inverse: 'subCategories' }),
-  subCategories: DS.hasMany('category', { inverse: 'parent' })
+  subCategories: DS.hasMany('category', { inverse: 'parent' }),
+
+  topLevel: Ember.computed.empty('parent.id')
 });

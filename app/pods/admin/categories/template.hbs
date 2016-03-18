@@ -1,5 +1,10 @@
 <ul>
-  {{#each model as |category|}}
+  {{#each topLevelCategories as |category|}}
     <li>{{category.title}}</li>
+    <ul>
+      {{#each category.subCategories as |subCategory|}}
+        <li>{{subCategory.title}}</li>
+      {{/each}}
+    </ul>
   {{/each}}
 </ul>

@@ -44,13 +44,45 @@ export default function() {
 
   this.get('/categories', function(db) {
     return {
-      data: db.categories.map(attrs => (
-        {
+      data: db.categories.map(attrs => {
+        var category = {
           type: 'categories',
           id: attrs.id,
           attributes: attrs
+        };
+        var relationships = {};
+        var hasRelationships = false;
+
+        if(attrs.parent_id) {
+          relationships.parent = {
+            data: {
+              type: 'category',
+              id: attrs.parent_id
+            }
+          };
+          hasRelationships = true;
         }
-      ))
+
+        var subCategories = db.categories.filter(subAttrs => {
+          return subAttrs.parent_id === attrs.id;
+        }).map(subAttrs => ({
+          type: 'category',
+          id: subAttrs.id
+        }));
+
+        if(subCategories) {
+          relationships.subCategories = {
+            data: subCategories
+          };
+          hasRelationships = true;
+        }
+
+        if(hasRelationships) {
+          category.relationships = relationships;
+        }
+
+        return category;
+      })
     };
   });
 
