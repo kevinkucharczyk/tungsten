@@ -25,7 +25,7 @@ export default function() {
     }
   });
 
-  this.get('/users/me', function(db, request){
+  this.get('/api/users/me', function(db, request){
     if(request.requestHeaders.Authorization === 'Bearer ' + bearer) {
       return {
         data: {
@@ -42,7 +42,7 @@ export default function() {
     }
   });
 
-  this.get('/categories', function(db) {
+  this.get('/api/categories', function(db) {
     return {
       data: db.categories.map(attrs => {
         var category = {
@@ -86,7 +86,7 @@ export default function() {
     };
   });
 
-  this.post('/categories', function(db, request) {
+  this.post('/api/categories', function(db, request) {
     var attrs = JSON.parse(request.requestBody).data.attributes;
     var relationships = JSON.parse(request.requestBody).data.relationships;
 
