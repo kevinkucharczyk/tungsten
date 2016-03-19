@@ -86,6 +86,43 @@ export default function() {
     };
   });
 
+  this.post('/categories', function(db, request) {
+    var attrs = JSON.parse(request.requestBody).data.attributes;
+    var relationships = JSON.parse(request.requestBody).data.relationships;
+
+    var newCategory = {
+      title: attrs.title,
+      disabled: attrs.disabled
+    };
+
+    if(relationships.parent.data) {
+      newCategory.parent_id = relationships.parent.data.id;
+    }
+
+    var dbCategory = db.categories.insert(newCategory);
+
+    var category = {
+      type: 'categories',
+      id: dbCategory.id,
+      attributes: attrs
+    };
+
+    if(newCategory.parent_id) {
+      category.relationships = {
+        parent: {
+          data: {
+            type: 'category',
+            id: newCategory.parent_id
+          }
+        }
+      };
+    }
+
+    return {
+      data: category
+    };
+  });
+
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
