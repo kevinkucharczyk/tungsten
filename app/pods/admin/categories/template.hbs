@@ -2,10 +2,10 @@
 
 <ul>
   {{#each topLevelCategories as |category|}}
-    <li>{{category.title}}</li>
+    <li>{{category.categoryWithParents}}</li>
     <ul>
       {{#each category.subCategories as |subCategory|}}
-        <li>{{subCategory.title}}</li>
+        <li>{{subCategory.categoryWithParents}}</li>
       {{/each}}
     </ul>
   {{/each}}

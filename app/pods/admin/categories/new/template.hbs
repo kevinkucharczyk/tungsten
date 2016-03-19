@@ -6,8 +6,8 @@
   <label for="parent">Parent Category</label>
   {{#x-select value=(mut parent)}}
     <option selected>-</option>
-    {{#each model as |category|}}
-      {{#x-option value=category}}{{category.title}}{{/x-option}}
+    {{#each sortedCategories as |category|}}
+      {{#x-option value=category}}{{category.categoryWithParents}}{{/x-option}}
     {{/each}}
   {{/x-select}}
   <button type="submit">Save</button>
