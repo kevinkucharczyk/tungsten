@@ -4,11 +4,13 @@
   <label for="disabled">Disabled</label>
   {{input id='disabled' type='checkbox' checked=disabled}}
   <label for="parent">Parent Category</label>
-  {{#x-select value=(mut parent)}}
-    <option selected>-</option>
-    {{#each sortedCategories as |category|}}
-      {{#x-option value=category}}{{category.categoryWithParents}}{{/x-option}}
-    {{/each}}
-  {{/x-select}}
+  {{#power-select
+    selected=parent
+    searchField="categoryWithParents"
+    options=sortedCategories
+    onchange=(action (mut parent))
+    as |category|}}
+    {{category.categoryWithParents}}
+  {{/power-select}}
   <button type="submit">Save</button>
 </form>

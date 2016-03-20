@@ -16,6 +16,11 @@ export default Ember.Route.extend({
       });
 
       category.save().then(() => {
+        this.get('controller').setProperties({
+          title: '',
+          disabled: false,
+          parent: null
+        });
         this.transitionTo('admin.categories');
       });
     }
