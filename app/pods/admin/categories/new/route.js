@@ -15,7 +15,9 @@ export default Ember.Route.extend({
         parent: parent
       });
 
-      category.save();
+      category.save().then(() => {
+        this.transitionTo('admin.categories');
+      });
     }
   }
 });
