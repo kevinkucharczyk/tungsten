@@ -26,6 +26,7 @@ $nav-color: #87AEBD;
     transition: color 0.2s ease,
       background-color 0.2s ease;
 
+    &.active,
     &:hover {
       background-color: #5586A6;
       color: lighten($nav-color, 25%);
