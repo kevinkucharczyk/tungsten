@@ -1,1 +1,13 @@
-{{outlet}}
+<nav class="admin-nav">
+  <ul class="admin-nav__list">
+    <li>
+      {{#link-to "admin.categories" class="admin-nav__link"}}
+        <i class="fa fa-folder"></i>
+      {{/link-to}}
+    </li>
+  </ul>
+</nav>
+
+<div class="admin-content">
+  {{outlet}}
+</div>

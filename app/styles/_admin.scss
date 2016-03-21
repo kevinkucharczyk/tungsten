@@ -1,0 +1,7 @@
+$navbar-width: 50px;
+
+@import 'nav-admin';
+
+.admin-content {
+  margin-left: $navbar-width;
+}
