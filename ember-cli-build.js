@@ -4,9 +4,14 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
+    autoprefixer: {
+      browsers: ['last 2 version'],
+      cascade: false
+    },
     sassOptions: {
       includePaths: [
-        'bower_components/font-awesome/scss'
+        'bower_components/font-awesome/scss',
+        'bower_components/foundation-sites/scss'
       ]
     }
   });
