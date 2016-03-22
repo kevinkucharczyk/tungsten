@@ -1,16 +1,23 @@
 <form {{action 'save' on='submit'}}>
-  <label for="title">Title</label>
-  {{input id='title' placeholder='Title' value=title}}
-  <label for="disabled">Disabled</label>
-  {{input id='disabled' type='checkbox' checked=disabled}}
-  <label for="parent">Parent Category</label>
-  {{#power-select
-    selected=parent
-    searchField="categoryWithParents"
-    options=sortedCategories
-    onchange=(action (mut parent))
-    as |category|}}
-    {{category.categoryWithParents}}
-  {{/power-select}}
-  <button type="submit">Save</button>
+  <div class="row">
+    <div class="columns">
+      <label for="title">Title
+        {{input id='title' placeholder='Title' value=title}}
+      </label>
+      <label for="disabled">Disabled
+        {{input id='disabled' type='checkbox' checked=disabled}}
+      </label>
+      <label for="parent">Parent Category
+        {{#power-select
+          selected=parent
+          searchField="categoryWithParents"
+          options=sortedCategories
+          onchange=(action (mut parent))
+          as |category|}}
+          {{category.categoryWithParents}}
+        {{/power-select}}
+      </label>
+      <button type="submit" class="button">Save</button>
+    </div>
+  </div>
 </form>
