@@ -9,8 +9,12 @@
 </nav>
 
 <div class="admin-content">
-  <nav aria-label="You are here:" role="navigation">
-    {{bread-crumbs tagName="ul"  outputStyle="foundation" linkable=true}}
-  </nav>
+  <div class="row">
+    <div class="columns">
+      <nav aria-label="You are here:" role="navigation">
+        {{bread-crumbs tagName="ul"  outputStyle="foundation" linkable=true}}
+      </nav>
+    </div>
+  </div>
   {{outlet}}
 </div>
