@@ -1,0 +1,8 @@
+<li>{{category.categoryWithParents}}</li>
+{{#if category.subCategories}}
+  <ul>
+    {{#each category.subCategories as |subCategory|}}
+      {{category-children-list category=subCategory}}
+    {{/each}}
+  </ul>
+{{/if}}

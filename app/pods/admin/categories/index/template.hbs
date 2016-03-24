@@ -3,12 +3,7 @@
     {{link-to "Create New Category" "admin.categories.new" class="button"}}
     <ul>
       {{#each topLevelCategories as |category|}}
-        <li>{{category.categoryWithParents}}</li>
-        <ul>
-          {{#each category.subCategories as |subCategory|}}
-            <li>{{subCategory.categoryWithParents}}</li>
-          {{/each}}
-        </ul>
+        {{category-children-list category=category}}
       {{/each}}
     </ul>
   </div>
