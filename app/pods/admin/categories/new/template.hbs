@@ -13,6 +13,7 @@
           searchField="categoryWithParents"
           options=sortedCategories
           onchange=(action (mut parent))
+          allowClear=true
           as |category|}}
           {{category.categoryWithParents}}
         {{/power-select}}
