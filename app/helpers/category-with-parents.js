@@ -7,7 +7,7 @@ export function categoryWithParents(params) {
   if(isTopLevel) {
     return currentTitle;
   }
-  return categoryWithParents([category.get('parent'), category.get('parent.title') + '/' + currentTitle]);
+  return categoryWithParents([category.get('parent'), category.get('parent.title') + ' > ' + currentTitle]);
 }
 
 export default Ember.Helper.helper(categoryWithParents);

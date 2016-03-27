@@ -1,10 +1,21 @@
 <div class="expanded row">
   <div class="columns">
     {{link-to "Create New Category" "admin.categories.new" class="button"}}
-    <ul>
-      {{#each topLevelCategories as |category|}}
-        {{category-children-list category=category}}
-      {{/each}}
-    </ul>
+    <table class="hover stack">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th width="100">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each sortedCategories as |category|}}
+          <tr class="category-list-item {{if category.disabled "disabled"}}">
+            <td>{{category.categoryWithParents}}</td>
+            <td>Edit</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </div>
