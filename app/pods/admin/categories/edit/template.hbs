@@ -1,0 +1,24 @@
+<form {{action 'save' on='submit'}}>
+  <div class="expanded row">
+    <div class="columns">
+      <label for="title">Title
+        {{input id='title' placeholder='Title' value=model.category.title}}
+      </label>
+      <label for="disabled">Disabled
+        {{input id='disabled' type='checkbox' checked=model.category.disabled}}
+      </label>
+      <label for="parent">Parent Category
+        {{#power-select
+          selected=model.category.parent
+          searchField="categoryWithParents"
+          options=sortedCategories
+          onchange=(action (mut model.category.parent))
+          allowClear=true
+          as |category|}}
+          {{category.categoryWithParents}}
+        {{/power-select}}
+      </label>
+      <button type="submit" class="button">Save</button>
+    </div>
+  </div>
+</form>

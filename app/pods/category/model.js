@@ -10,7 +10,7 @@ export default DS.Model.extend({
   subCategories: DS.hasMany('category', { inverse: 'parent' }),
 
   topLevel: Ember.computed.empty('parent.id'),
-  categoryWithParents: Ember.computed('parent', function() {
+  categoryWithParents: Ember.computed('title', function() {
     return categoryWithParents([this]);
-  })
+  }).volatile()
 });

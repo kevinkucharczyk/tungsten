@@ -28,10 +28,10 @@ test('renders topLevel title', function(assert) {
 
 test('renders child title with parent title', function(assert) {
   let result = categoryWithParents([secondLevelCategory]);
-  assert.equal(result, topLevelCategory.get('title') + '/' + secondLevelCategory.get('title'));
+  assert.equal(result, topLevelCategory.get('title') + ' > ' + secondLevelCategory.get('title'));
 });
 
 test('renders doubly nested child title', function(assert) {
   let result = categoryWithParents([thirdLevelCategory]);
-  assert.equal(result, topLevelCategory.get('title') + '/' + secondLevelCategory.get('title') + '/' + thirdLevelCategory.get('title'));
+  assert.equal(result, topLevelCategory.get('title') + ' > ' + secondLevelCategory.get('title') + ' > ' + thirdLevelCategory.get('title'));
 });

@@ -42,6 +42,71 @@ export default function() {
     }
   });
 
+  this.get('/api/categories/:id', function(db, request) {
+    let id = request.params.id;
+    let attrs = db.categories.find(id);
+
+    var category = {
+      type: 'categories',
+      id: request.params.id,
+      attributes: attrs
+    };
+
+    var relationships = {};
+
+    if(attrs.parent_id) {
+      relationships.parent = {
+        data: {
+          type: 'category',
+          id: attrs.parent_id
+        }
+      };
+
+      category.relationships = relationships;
+    }
+
+    return {
+      data: category
+    };
+  });
+
+  this.patch('/api/categories/:id', function(db, request) {
+    let id = JSON.parse(request.requestBody).data.id;
+    let attrs = JSON.parse(request.requestBody).data.attributes;
+    let relationships = JSON.parse(request.requestBody).data.relationships;
+
+    let dbCategory = db.categories.update(id, attrs);
+
+    console.log(relationships);
+
+    if(relationships && relationships.parent && relationships.parent.data) {
+      dbCategory = db.categories.update(id, { parent_id: relationships.parent.data.id });
+    } else {
+      dbCategory = db.categories.update(id, { parent_id: null });
+    }
+
+    let category = {
+      type: 'categories',
+      id: id,
+      attributes: attrs
+    };
+
+    if(dbCategory.parent_id) {
+      category.relationships = {
+        parent: {
+          data: {
+            type: 'category',
+            id: dbCategory.parent_id
+          }
+        }
+      };
+    }
+
+    return {
+      data: category
+    };
+  });
+
   this.get('/api/categories', function(db) {
     return {
       data: db.categories.map(attrs => {

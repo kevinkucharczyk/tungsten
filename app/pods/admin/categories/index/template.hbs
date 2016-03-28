@@ -12,7 +12,7 @@
         {{#each sortedCategories as |category|}}
           <tr class="category-list-item {{if category.disabled "disabled"}}">
             <td>{{category.categoryWithParents}}</td>
-            <td>Edit</td>
+            <td>{{link-to "Edit" "admin.categories.edit" category.id class="button"}}</td>
           </tr>
         {{/each}}
       </tbody>
