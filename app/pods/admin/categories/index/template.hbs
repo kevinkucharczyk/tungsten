@@ -1,6 +1,6 @@
 <div class="expanded row">
   <div class="columns">
-    {{link-to "Create New Category" "admin.categories.new" class="button"}}
+    {{link-to "Create New Category" "admin.categories.new" class="button hollow"}}
     <table class="hover stack">
       <thead>
         <tr>
@@ -12,7 +12,7 @@
         {{#each sortedCategories as |category|}}
           <tr class="category-list-item {{if category.disabled "disabled"}}">
             <td>{{category.categoryWithParents}}</td>
-            <td>{{link-to "Edit" "admin.categories.edit" category.id class="button"}}</td>
+            <td>{{link-to "Edit" "admin.categories.edit" category.id class="button hollow"}}</td>
           </tr>
         {{/each}}
       </tbody>
